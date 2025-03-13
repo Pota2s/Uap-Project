@@ -63,10 +63,10 @@ class UserTransaction (models.Model):
 
 class UserPayment (models.Model):
     payment_method = models.TextField("")
-    transaction = models.ForeignKey(UserTransaction,null=True)
+    transaction = models.ForeignKey(UserTransaction,null=True,on_delete=models.CASCADE)
 
 class UserTransactionItem (models.Model):
-    transaction = models.ForeignKey(UserTransaction,null=True)
-    product = models.ForeignKey(Product,null=True)
+    transaction = models.ForeignKey(UserTransaction,null=True,on_delete=models.CASCADE)
+    product = models.ForeignKey(Product,null=True,on_delete=models.CASCADE)
 
     
