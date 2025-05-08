@@ -2,6 +2,10 @@ body{
     background-color: aliceblue;
 }
 
+/* h1{
+
+} */
+
 div.box{
     background-color: lightgray;
     border-color: black;
@@ -14,4 +18,14 @@ div.box{
         padding-bottom: 10px;
         font-size: small;
     }
+}
+
+div.user{
+    display: flex;
+    flex-direction: row;
+    aside{
+        background-color: lightgray;
+        min-width: 20%;
+    }
+
 }

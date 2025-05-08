@@ -10,13 +10,16 @@ def index(request):
     return render(request=request,template_name='home/index.html',context=context)
 
 def userPage(request,user_id : int):
+    
+    context = dict()
     try:
         user : User = User.objects.get(pk=user_id)
     except User.DoesNotExist:
         raise Http404("User does not exist")
-    
-    response = f"You are looking at the {user.user_name}'s page"
-    return HttpResponse(response)
+    context['user'] = user
+
+
+    return render(request=request,template_name='home/user.html',context=context)
 
 def register(request):
     return HttpResponse("Registration methods here, it should ask for input directly on the page and create a user with the details provided.")
