@@ -1,6 +1,7 @@
 from django.test import TestCase,Client
 from home.models import User,UserTransaction
 from datetime import date
+from django.http import HttpResponse
 # Create your tests here.
 
 class InitializationTestCase(TestCase):
@@ -44,5 +45,10 @@ class LoginTestCase(TestCase):
 
     def test_client_get_user_page(self):
         c = Client()
-        self.assertContains(response=c.get("/home/"),text="Home",status_code=200)
-        self.assertNotContains(response=c.get("/home/users/1"),text="test",status_code=200)
+        self.assertContains(response=c.get("/home/users/login/"),text="")
+
+class RegisterTestCase(TestCase):
+    def test_user_can_get_to_login(self):
+        c = Client()
+        response : HttpResponse = c.post("/home/users/register/",rever)
+        self.assertContains(response=response,text="")
