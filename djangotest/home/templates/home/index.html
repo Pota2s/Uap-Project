@@ -5,20 +5,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <link rel="stylesheet" href="/static/styles.css" />
+    <title>Uap Project</title>
+    <link rel="stylesheet" href="/static/styles.css">
 </head>
 <body>
-    <h1>Home</h1>
-    <div class="box">
-        <h2>Users</h2>
-        {% if user_list %}
-        <ul>
-            {% for user in user_list %}
-                <li><a href="./users/{{ user.id }}">{{user.user_name}}</a></li>
-            {% endfor %}
-        </ul>
-        {% endif %}
-    </div>
+    <body>
+
+        <header>
+          <a href="/" class="Logo">
+            <p>UAP<br>MARKET
+            </p>
+          </a>
+
+          <nav class="navbar">
+            <a href="/"class="home">HOME</a> |
+            <a href="/products">CATEGORIES</a> |
+            <a href="/cart">CART</a> |
+            <a href="/users/login"class="login">LOGIN</a>
+          </nav>
+        </header>
+      
+        <section>
+          <h2>Discover Unique Products</h2>
+          <p>Find the best deals from trusted sellers</p>
+        </section>
+      
+        <hr>
+      
+        <section>
+          <h3>Featured Products</h3>
+          <div>
+            {% if products_list %}
+              {% for product in products_list %}
+              <div>
+                <img src="{{product.product_thumbnail}}" alt="Product Image">
+                <a href="./products/{product.id}"><h4>{{product.product_name}}</h4></a>
+                <p>{{product.product_price}}$</p>
+                <button>Add to Cart</button>
+              </div>
+              {%endfor%}
+            {% endif %}
+          </div>
+        </section>
+      
+        <hr>
+      
+        <section>
+          <h3>Shop by Category</h3>
+          <ul>
+            <li><a>Electronics</a></li>
+            <li>Fashion</li>
+            <li>Home</li>
+            <li>Books</li>
+          </ul>
+        </section>
+      
+        <hr>
+
+        <footer>
+          <p>pls don't steal this shit, this is our uni project</p>
+        </footer>
 </body>
 </html>

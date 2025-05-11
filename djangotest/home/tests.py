@@ -50,5 +50,5 @@ class LoginTestCase(TestCase):
 class RegisterTestCase(TestCase):
     def test_user_can_get_to_login(self):
         c = Client()
-        response : HttpResponse = c.post("/home/users/register/",rever)
+        response : HttpResponse = c.post("/home/users/register/")
         self.assertContains(response=response,text="")

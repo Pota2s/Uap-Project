@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{user.user_name}}</title>
+    <title>Home</title>
     <link rel="stylesheet" href="/static/styles.css" />
 </head>
 <body>
@@ -22,17 +22,17 @@
           <a href="/cart">CART</a> |
           <a href="/users/login"class="login">LOGIN</a>
         </nav>
-      </header>
+    </header>
 
-    <h1>{{user.user_name}}</h1>
-    <div class='user'>
-        <aside class="profile">
-            <p>Test</p>
-        </aside>
-        <div class="box">
-            
-            
-        </div>
+    <div class="box">
+        <h2>Users</h2>
+        {% if user_list %}
+        <ul>
+            {% for user in user_list %}
+                <li><a href="./{{ user.id }}">{{user.user_name}}</a></li>
+            {% endfor %}
+        </ul>
+        {% endif %}
     </div>
 </body>
 </html>
