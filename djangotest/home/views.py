@@ -27,10 +27,3 @@ def userPage(request,user_id : int):
 
 
     return render(request=request,template_name='home/user.html',context=context)
-
-def register(request):
-    return HttpResponse("Registration methods here, it should ask for input directly on the page and create a user with the details provided.")
-
-def login(request):
-    return HttpResponse("Login method here, it should ask for input, then validate the user using SHA256 for the password")
-

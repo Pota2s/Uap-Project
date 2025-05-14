@@ -29,3 +29,8 @@ div.user{
     }
 
 }
+
+nav.navbar{
+    display: flex;
+    flex-direction: row;
+}

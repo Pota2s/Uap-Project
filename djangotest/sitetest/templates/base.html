@@ -1,0 +1,18 @@
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uap Project</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+    <nav class="navbar">
+        <a href="{% url 'home'%}" class="home">HOME</a>
+        <a href="products">CATEGORIES</a>
+        <a href="cart">CART</a>
+        <a href="/accounts/login/"class="login">LOGIN</a>
+    </nav>
+    {% block content %}
+    
+    {% endblock %}
+</body>
