@@ -32,7 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    "home.apps.HomeConfig",
+    "accounts",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -128,4 +128,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 mimetypes.add_type("text/css",".css",True)
 
-LOGIN_REDIRECT_URL = ""
+LOGIN_REDIRECT_URL = "/"
+
+AUTH_USER_MODEL = "accounts.CustomUser"
