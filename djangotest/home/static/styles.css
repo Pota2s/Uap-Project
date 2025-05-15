@@ -1,31 +1,247 @@
-body{
-    background-color: aliceblue;
+{% load static %}
+
+/*  GENERAL BODY STYLING  */
+body {
+    background: #1C1C1C;
+    background: linear-gradient(90deg, rgba(28, 28, 28, 1) 0%, rgba(26, 22, 22, 1) 100%);   
 }
 
-/* h1{
+/*  PALETTE */
+/*
+#1C1C1C - Dark Gray
+#3B3B3B - Medium Gray
+#FFE002 - Bright Yellow
+#FFB606 - Soft Yellow
+#B28228 - Brown
+*/
 
-} */
+/*  BOX CONTAINER STYLE */
+div.box {
+    background-color: lightgray; /* Background of container box */
+    border-color: black;         /* Border line color */
+    border: 2px;                 /* Border width (missing style: solid?) */
+    border-radius: 10px;         /* Rounded corners */
+    padding: 10px;               /* Space inside the box */
 
-div.box{
-    background-color: lightgray;
-    border-color: black;
-    border: 2px;
-    border-radius: 10px;
-    padding: 10px;
-    ul{
-        background-color: beige;
+    ul {
+        background-color: beige; /* Beige background for any ul inside this box */
         padding-top: 10px;
         padding-bottom: 10px;
         font-size: small;
     }
 }
 
-div.user{
+/*  USER LAYOUT */
+div.user {
+    display: flex;
+    flex-direction: row; /* Puts children (e.g., aside + content) side-by-side */
+
+    aside {
+        background-color: lightgray; /* Sidebar background */
+        min-width: 20%;              /* Takes up 20% of the horizontal space */
+    }
+}
+
+/*  NAVIGATION MENU GENERAL UL */
+ul {
+    padding-top: 10px;
+    padding-left: 1000px; /* Extremely large left padding – might need adjusting */
+    padding-bottom: 10px;
+    font-size: small;
+}
+
+/*  NAVIGATION LINKS LIST */
+ul.nav-link {
+    padding: 10px 0;
+    margin: 0;
+    list-style: none;          /* Removes bullet points */
+}
+
+/*  NAV BAR CONTAINER */
+nav {
+    padding: 0 0 0 200px; /* Pushes nav content right */
+    margin: 0;
+}
+
+/*  ICON STYLE IN NAVIGATION */
+.nav-link li img {
+    padding-top: 20px;
+    height: 30px;
+    width: 30px;
+}
+
+/*  HEADER BAR STYLE */
+header {
+    background: #FFE002;
+    background: radial-gradient(circle,rgba(255, 224, 2, 1) 0%, rgba(255, 182, 6, 1) 50%, rgba(178, 130, 40, 1) 100%);      
+    padding: 30px;
+    justify-items: center;
+    display: flex;                   /* Flex layout for logo + nav */
+    justify-content: space-between; /* Logo on left, nav on right */
+    align-items: center;
+}
+/* styles.css */
+.custom-search {
+    background-color: #ffe0f0;
+    color: #4a4a4a;
+    border: 1px solid #ccc;
+  }
+  
+  .custom-button {
+    background-color: #000000 !important;
+    color: white !important;
+  }
+  .custom-button:hover {
+    background-color: #ffffff !important;
+    color: rgb(0, 0, 0) !important;
+  }
+  
+  .custom-search::placeholder {
+    color: #ff0000;
+  }
+  
+  
+/*  TEXT STYLE SHARED FOR nav & buttons */
+li,a {
+    font-family: sans-serif;
+    font-weight: 1000;
+    font-size: 15px;
+    color: #1C1C1C !important;
+    text-decoration: none;
+}
+button {
+    font-family: sans-serif;
+    font-weight: 1000;
+    font-size: 15px;
+    color: white;
+    text-decoration: none;
+}
+
+/* LOGO STYLE */
+.logo {
+    cursor: pointer; /* Pointer on hover */
+}
+
+/*  NAV LIST RESET */
+.nav-link {
+    list-style: none;
+}
+
+/*  NAV ITEM SPACING */
+.nav-link li {
+    display: inline-block;
+    padding: 0px 20px; /* Space between each nav item */
+}
+
+/*  LINK TRANSITION */
+.nav-link li a {
+    transition: all 0.3s ease 0s;
+    text-decoration: none; /* Smooth hover transition */
+}
+
+/*  NAV HOVER EFFECT */
+.nav-link li a:hover {
+    color: #EDC7B7 !important;              
+    background-color: #1C1C1C;   /* Hover background color */
+    border-radius: 20px;         /* Rounded nav buttons */
+    padding: 10px 20px;
+    margin: 1px;
+}
+
+/*  LOGIN BUTTON STYLE */
+.loginbtn button {
+    padding: 9px 25px;
+    background-color: #190e12;
+    margin-right: 30px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+.loginbtn button:hover {
+    background-color: #fff1f1; 
+    color: #1C1C1C;            
+}
+
+/*  SECTION: BODY 1 – MAIN INTRO */
+section.body1 {
+    background: #1C1C1C;
+    background: linear-gradient(90deg, rgba(28, 28, 28, 1) 0%, rgba(26, 22, 22, 1) 100%);
+    color: #FFB606;
+    margin: 0;
+    padding: 75px 0 20px 30px;
+}
+
+/*  GENERAL SECTION STYLE */
+section {
+    color: #FFB606;
+    padding: 30px;
+    margin-left: 50px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+section h2 {
+    font-size: 30px;
+    font-weight: 1000;
+    margin-bottom: 10px;
+}
+
+section p {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+/*  SECTION: BODY 2 – CATEGORIES OR FEATURES */
+section.body2 {
+    margin: 0;
+}
+
+section.body2 h3 {
+    font-size: 30px;
+    color: #3B3B3B;
+    padding: 20px;
+    background: #FFE002;
+    background: radial-gradient(circle,rgba(255, 224, 2, 1) 0%, rgba(255, 182, 6, 1) 50%, rgba(178, 130, 40, 1) 100%);      
+    margin-bottom: 10px;
+}
+
+/*  FLEX CONTAINER FOR PRODUCTS OR CATEGORIES */
+.container {
     display: flex;
     flex-direction: row;
-    aside{
-        background-color: lightgray;
-        min-width: 20%;
-    }
+    justify-content: space-around;
+}
 
+.container div {
+    background-color: #EDC7B7;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 10px;
+    width: 30%;
+}
+
+/*  PRODUCT CARD STYLES */
+div.product-card a {
+    color: #123c69;
+}
+
+div.product-card p {
+    color: #123c69;
+}
+
+div.product-card button {
+    color: #123c69;
+}
+
+/*  CATEGORY LIST – LIKE A SIDEBAR */
+ul.category-list {
+    list-style: none;
+    padding: 0;
+}
+
+.category-list a {
+    color: #123c69;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
 }
