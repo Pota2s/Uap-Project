@@ -3,16 +3,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Uap Project{% endblock %}</title>
-    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="../static/styles.css" />
 </head>
+<header>
+        <img class="logo" src="../assets/logo.png" style="height: 75px;">
+        <nav>
+            <ul class="nav-link">
+              <li><a href="{% url 'home'%}">HOME</a></li>
+              <li><a href="products">CATEGORIES</a></li>
+              <li><a href="cart">CART</a></li>
+        </ul>
+        </nav>
+       
+        <form class="d-flex">
+          <input class="form-control custom-search me-2" type="search" placeholder="Search...">
+          <button class="btn custom-button" type="submit">Search</button>
+        </form>
+
+        <a class="loginbtn" href="registration/login.html"><button class="loginbtn" >LOGIN</button></a>
+        
+    </header>
 <body>
-    <nav class="navbar">
-        <a href="{% url 'home'%}" class="home">HOME</a> | 
-        <a href="products">CATEGORIES</a> | 
-        <a href="cart">CART</a> |
-        <a href="/accounts/login/"class="login">LOGIN</a>
-    </nav>
-    {% block content %}
-    
-    {% endblock %}
+        {% block content %}
+        
+        {% endblock %}
+        
 </body>
+
+<footer>
+    <p>pls don't steal this shit, this is our uni project</p>
+</footer>
