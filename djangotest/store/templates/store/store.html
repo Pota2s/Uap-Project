@@ -4,6 +4,10 @@
 
 {% block content %}
 <h1>{{store.name}}</h1>
+{% if store.owner == user %}
+    <a href="{% url 'store_edit' store.id %}">Edit Store</a>
+{% endif %}
+<p>{{store.description}}<p>
 
 {% if products %}
     {% for product in products %}
@@ -11,7 +15,6 @@
     <p>{{product.description}}</p>
     {% endfor %}
 {% else %}
-
-
+    <p>This store has no products.</p>
 {% endif %}
 {% endblock %}

@@ -3,6 +3,7 @@ from accounts.models import CustomUser
 
 # Create your models here.
 class Store(models.Model):
+    id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=32,default="",blank=False)
     description = models.CharField(max_length=2048,default="",blank=True)
     owner = models.ForeignKey(CustomUser, on_delete=models.CASCADE,null=True)

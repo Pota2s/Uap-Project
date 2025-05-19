@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}{{store.name}}{% endblock %}
+
+{% block content %}
+    <h2>Edit Store</h2>
+    <h3>{{ store.name }}</h3>
+    <p>{{ store.description }}</p>
+    <form action = "" method = "post">
+        {% csrf_token %}
+        {{ form.as_p }} 
+        <input type = "submit" value = "Submit">
+    </form>
+{% endblock %}
