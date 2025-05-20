@@ -13,8 +13,9 @@ class StoreMember(models.Model):
     store = models.ForeignKey(Store,on_delete=models.CASCADE,null=True)
 
 class Product(models.Model):
+    id = models.AutoField(primary_key=True)
     store = models.ForeignKey(Store, on_delete= models.CASCADE)
     name = models.CharField(max_length=32,default="",blank=False)
-    cost = models.FloatField(null=True,default=0)
+    price = models.FloatField(null=True,default=0)
     description = models.CharField(max_length=2048,default="",blank=True)
-    thumbnail = models.CharField(max_length=1024,default="",blank=True)
+    thumbnail = models.ImageField(upload_to='product_thumbnails/', default='product_thumbnails/default.jpg', blank=True)

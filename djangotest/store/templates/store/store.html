@@ -4,15 +4,20 @@
 
 {% block content %}
 <h1>{{store.name}}</h1>
-{% if store.owner == user %}
+{% if store.owner == user or user in store_members %}
     <a href="{% url 'store_edit' store.id %}">Edit Store</a>
+    <a href="{% url 'product_create' store.id %}">Add Product</a>
 {% endif %}
 <p>{{store.description}}<p>
 
 {% if products %}
     {% for product in products %}
-    <h2>{{product.name}}</h2>
+    <a href="{% url 'product' store.id product.id %}"><h2>{{product.name}}</h2></a>
+    
+    {% if product.description != "" %}
     <p>{{product.description}}</p>
+    {% endif %}
+    
     {% endfor %}
 {% else %}
     <p>This store has no products.</p>
