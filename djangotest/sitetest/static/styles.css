@@ -2,7 +2,7 @@
 /*  GENERAL BODY STYLING  */
 body {
     background: #1C1C1C;
-    background: linear-gradient(90deg, rgba(28, 28, 28, 1) 0%, rgba(26, 22, 22, 1) 100%);   
+    background: radial-gradient(circle,rgba(192, 139, 67, 1) 0%, rgba(255, 206, 70, 1) 50%, rgba(192, 139, 67, 1) 100%);
 }
 
 /*  PALETTE */
@@ -71,7 +71,7 @@ nav {
 
 /*  HEADER BAR STYLE */
 header {
-    background: radial-gradient(circle,rgba(255, 224, 2, 1) 0%, rgba(255, 182, 6, 1) 50%, rgba(178, 130, 40, 1) 100%);      
+    background: radial-gradient(circle,rgba(192, 139, 67, 1) 0%, rgba(255, 206, 70, 1) 50%, rgba(192, 139, 67, 1) 100%);      
     padding: 30px;
     justify-items: center;
     display: flex;                   /* Flex layout for logo + nav */
@@ -164,8 +164,7 @@ button {
 
 /*  SECTION: BODY 1 – MAIN INTRO */
 section.body1 {
-    background: #1C1C1C;
-    background: linear-gradient(90deg, rgba(28, 28, 28, 1) 0%, rgba(26, 22, 22, 1) 100%);
+    background: radial-gradient(circle,rgba(192, 139, 67, 1) 0%, rgba(255, 206, 70, 1) 50%, rgba(192, 139, 67, 1) 100%);
     color: #FFB606;
     margin: 0;
     padding: 75px 0 20px 30px;
@@ -199,8 +198,7 @@ section.body2 h3 {
     font-size: 30px;
     color: #3B3B3B;
     padding: 20px;
-    background: #FFE002;
-    background: radial-gradient(circle,rgba(255, 224, 2, 1) 0%, rgba(255, 182, 6, 1) 50%, rgba(178, 130, 40, 1) 100%);      
+    background: radial-gradient(circle,rgba(192, 139, 67, 1) 0%, rgba(255, 206, 70, 1) 50%, rgba(192, 139, 67, 1) 100%);     
     margin-bottom: 10px;
 }
 
@@ -246,7 +244,7 @@ ul.category-list {
 }
 
 .footer {
-    background: radial-gradient(circle,rgba(255, 224, 2, 1) 0%, rgba(255, 182, 6, 1) 50%, rgba(178, 130, 40, 1) 100%);
+    background: radial-gradient(circle,rgba(192, 139, 67, 1) 0%, rgba(255, 206, 70, 1) 50%, rgba(192, 139, 67, 1) 100%);
     color: #000000;
     font-family: sans-serif;
     text-align: center;
