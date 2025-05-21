@@ -80,7 +80,7 @@ header {
 }
 /* styles.css */
 .custom-search {
-    background-color: #ffe0f0;
+    background-color: #ffffff;
     color: #4a4a4a;
     border: 1px solid #ccc;
   }
@@ -95,7 +95,7 @@ header {
   }
   
   .custom-search::placeholder {
-    color: #ff0000;
+    color: #000000;
   }
   
   
@@ -140,7 +140,7 @@ button {
 
 /*  NAV HOVER EFFECT */
 .nav-link li a:hover {
-    color: #EDC7B7 !important;              
+    color: #ffffff !important;              
     background-color: #1C1C1C;   /* Hover background color */
     border-radius: 20px;         /* Rounded nav buttons */
     padding: 10px 20px;
@@ -247,7 +247,7 @@ ul.category-list {
 
 .footer {
     background: radial-gradient(circle,rgba(255, 224, 2, 1) 0%, rgba(255, 182, 6, 1) 50%, rgba(178, 130, 40, 1) 100%);
-    color: #ffffff;
+    color: #000000;
     font-family: sans-serif;
     text-align: center;
     padding: 30px auto;
@@ -329,14 +329,14 @@ ul.category-list {
 
 .social a{
     font-size: 16px;
-    color: #ffffff;
+    color: #000000 !important;
     text-decoration: none;
     transition: all 0.3s linear;
 }
 
 .social a:hover {
     font-size: 16px;
-    color: gold;
+    color: rgb(255, 255, 255) !important;
     text-decoration: none;
 }
 
