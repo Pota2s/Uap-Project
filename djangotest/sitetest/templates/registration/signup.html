@@ -3,10 +3,42 @@
 {% block title%}Sign Up{% endblock %}
 
 {% block content %}
-<h2>Sign Up</h2>
+<link rel="stylesheet" href="../../static/regist.css">
+
 <form method="post">
     {% csrf_token %}
+    
+    <div class="signup-form">
+        <h2 class="signtitle">Sign Up</h2>
+
+        <label for="id_username">Username:</label>
+        <input type="text" name="username" id="id_username" required><br><br>
+    
+        <label for="id_email">Email:</label>
+        <input type="email" name="email" id="id_email" required><br><br>
+    
+        <label for="id_password1">Password:</label>
+        <input type="password" name="password1" id="id_password1" required><br><br>
+    
+        <label for="id_password2">Confirm Password:</label>
+        <input type="password" name="password2" id="id_password2" required><br><br>
+    
+        <label for="id_dob">Date of Birth:</label>
+        <input type="date" name="dob" id="id_dob" required><br><br>
+    
+        <label>
+            <input type="checkbox" name="agree" required>
+            I agree to the terms and conditions
+        </label><br>
+    
+        <button class="regisbtn" type="submit">Register</button>
+    </div>
     {{form}}
-    <button type="submit">Register</button>
 </form>
 {% endblock %}
+
+
+
+{% comment %} Code here {% endcomment %}
+{% comment %} can it connect to the styles in the base.html? {% endcomment %}
+
