@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}{{ user.username }}{% endblock %}
+
+{% block content %}
+    <h1>{{ user.username }}</h1>
+    <h1>Wishlist</h1>
+    <ul>
+        {% for wishlist_item in wishlist %}
+            <li><a href="{% url 'product' store_id=wishlist_item.product.store.id product_id=wishlist_item.product.id %}">{{ wishlist_item.product.name }}</a></li>
+        {% empty %}
+            <li>No items in wishlist.</li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}

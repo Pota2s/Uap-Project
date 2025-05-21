@@ -18,4 +18,15 @@ class Product(models.Model):
     name = models.CharField(max_length=32,default="",blank=False)
     price = models.FloatField(null=True,default=0)
     description = models.CharField(max_length=2048,default="",blank=True)
-    thumbnail = models.ImageField(upload_to='product_thumbnails/', default='product_thumbnails/default.jpg', blank=True)
+    thumbnail = models.CharField(max_length=2048,default="",blank=True)
+
+class Order(models.Model):
+    id = models.AutoField(primary_key=True)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE,null=True)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE,null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+
+class WishList(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE,null=True)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
