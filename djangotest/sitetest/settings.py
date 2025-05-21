@@ -122,6 +122,10 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
@@ -132,3 +136,6 @@ mimetypes.add_type("text/css",".css",True)
 LOGIN_REDIRECT_URL = "/"
 
 AUTH_USER_MODEL = "accounts.CustomUser"
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'

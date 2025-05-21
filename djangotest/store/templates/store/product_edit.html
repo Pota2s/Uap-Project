@@ -6,7 +6,7 @@
     <h2>Edit product</h2>
     <h3>{{ store.name }}</h3>
     <p>{{ store.description }}</p>
-    <form action = "" method = "post">
+    <form action = "" method = "post" enctype = "multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }} 
         <input type = "submit" value = "Submit">

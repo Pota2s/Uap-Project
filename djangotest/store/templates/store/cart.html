@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Cart{% endblock %}
+
+{% load static %}
+
+{% block styles %}
+    <link rel="stylesheet" href= {% static 'cart.css' %}>
+{% endblock %}
+
+{% block content %}
+    
+    <div class="cart-text">
+        <h2>Your Shopping Cart</h2>
+        <p>Check Out Your Items Now!</p>    
+    </div>
+
+    {% if user.is_authenticated %}
+    
+    {% for order in cart %}
+    <div class="product-card">
+        <img src="{{order.product.thumbnail}}" alt="Product Image">
+        <div class="product-card-content">
+            <a href="{% url 'product' store_id=order.product.store.id product_id=order.product.id %}"><h4>{{order.product.name}}</h4></a>
+            <p>{{order.product.price}}$</p>
+        </div>
+        <form method="post" action="{% url 'remove_from_cart' store_id=order.product.store.id product_id=order.product.id %}">
+            {% csrf_token %}
+            <button type="submit">Remove from Cart</button>
+        </form>
+    </div>
+    {% empty %}
+    <p>No items in cart.</p>
+    {% endfor %}
+
+    
+
+    <h2>Total Price: {{ total_price }}$</h2>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Checkout</button>
+    </form>
+    {% else %}
+    <p>Please <a href="{% url 'login' %}">log in</a> to view your cart.</p>
+    {% endif %}
+
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'cart.css' %}">
+{% endblock %}
+
+
+{% block title %}
+    Store
+{% endblock %}
+
+{% block content %}
+    <div class="cart-text">
+        <h2>Discover Unique Products</h2>
+        <p>Find the best deals from trusted sellers</p>
+    </div>
+
+    {% if products %}
+        {% for product in products %}
+            <div class="product-card">
+                {% if product.thumbnail %}
+                    <img src="{{product.thumbnail.url}}" alt="Product Image">
+                {% else %}
+                    <img src="{% static 'default.svg' %}" style="width: 128px; height: auto;" alt="Default Image">
+                {% endif %}
+                <div class="product-card-content">
+                    <a href="{% url 'product' store_id=product.store.id product_id=product.id %}"><h4>{{product.name}}</h4></a>
+                    <p>{{product.price}}$</p>
+                </div>
+                <form method="post" action="{% url 'add_to_cart' store_id=product.store.id product_id=product.id %}">
+                    {% csrf_token %}
+                    <button class="add-to-cart" type="submit">Add to Cart</button>
+                </form>
+                
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No products exist</p>
+    {% endif %}
+{% endblock %}

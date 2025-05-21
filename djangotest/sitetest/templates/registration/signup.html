@@ -2,11 +2,50 @@
 
 {% block title%}Sign Up{% endblock %}
 
+{% load static %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'account.css' %}">
+{% endblock %}
+
+{% block navbar %}
+{% endblock %}
+
 {% block content %}
-<h2>Sign Up</h2>
-<form method="post">
-    {% csrf_token %}
-    {{form}}
-    <button type="submit">Register</button>
-</form>
+<div class="main">
+    <div class="container">
+        <h2>Sign Up</h2>
+        <form method="post">
+            {% csrf_token %}
+            <div id="io">
+                <div class="vertical-flex left-justify">
+                    {{form.username.label_tag}}
+                    {{form.password1.label_tag}}
+                    {{form.password2.label_tag}}
+                    {{form.email.label_tag}}
+                </div>
+                <div class="verticalflex">
+                    {{form.username}}
+                    {{form.password1}}
+                    {{form.password2}}
+                    {{form.email}}
+                </div>
+            </div>
+            {% if form.non_field_errors %}
+                <div class="error">
+                    {{ form.non_field_errors }}
+                </div>
+            {% endif %}
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <div class="error">
+                        {{ error }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+            <button type="submit">Register</button>
+        </form>
+        <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
+    </div>
+</div>
 {% endblock %}

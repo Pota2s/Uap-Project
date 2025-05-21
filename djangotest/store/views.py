@@ -26,6 +26,14 @@ def productView(request : HttpRequest, product_id : int, store_id : int):
     except models.WishList.DoesNotExist:
         context['is_wishlisted'] = False
 
+    context['is_in_cart'] = False
+
+    try:
+        models.Order.objects.get(product=context['product'],user=request.user)
+        context['is_in_cart'] = True
+    except models.Order.DoesNotExist:
+        context['is_in_cart'] = False
+
     return render(request=request,template_name='store/product.html',context=context)
 
 def storeView(request : HttpRequest,store_id : int):
@@ -153,6 +161,23 @@ def removeFromCart(request : HttpRequest,product_id : int,store_id : int):
     return redirect('product',store_id=store_id,product_id=product_id) # type: ignore
 
 def cartView(request : HttpRequest):
+    
+    if not request.user.is_authenticated:
+        return render(request=request,template_name='store/cart.html',context=dict())
     context = dict()
     context['cart'] = list(models.Order.objects.filter(user=request.user))
+    if request.method == 'POST':
+        for order in context['cart']:
+            order.delete()
+        return redirect('cart')
+
+    context['total_price'] = 0.0
+    for order in context['cart']:
+        context['total_price'] += order.product.price # type: ignore
+
     return render(request=request,template_name='store/cart.html',context=context)
+
+def globalStoreView(request : HttpRequest):
+    ctx = dict()
+    ctx['products'] = models.Product.objects.all().order_by('-id')
+    return render(request=request,template_name='store/global_store.html',context=ctx)
