@@ -42,7 +42,7 @@ label{
 
 .container{
     background: #2A1E00;
-    border: 2px solid rgb(255, 187, 0); /* Add this line for a yellow border */
+    border: 2px solid rgb(255, 187, 0);
     display: flex;
     flex-direction: column;
     justify-content: space-between;

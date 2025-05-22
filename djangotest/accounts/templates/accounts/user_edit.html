@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title%}
+{{ user.username }}
+{% endblock %}
+
+{% load static %}
+
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'account.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="main">
+        <div class="container">
+            <h2>Edit Profile</h2>
+            
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div id="io">
+                        <div class="verticalflex">
+                            <label for="username">{{ form.username.label_tag }}</label>
+                            <label for="email">{{ form.email.label_tag }}</label>
+                        </div>
+                        <div class="verticalflex">
+                            {{ form.username }}
+                            {{ form.email }}
+                        </div>
+                    </div>
+                    {% if form.non_field_errors %}
+                        <p style="color: red;">{{ form.non_field_errors }}</p>
+                    {% endif %}
+                    {% if form.username.errors %}
+                        <p style="color: red;">{{ form.username.errors }}</p>
+                    {% endif %}
+                    {% if form.email.errors %}
+                        <p style="color: red;">{{ form.email.errors }}</p>
+                    {% endif %}
+                    {% if form.password.errors %}
+                        <p style="color: red;">{{ form.password.errors }}</p>
+                    {% endif %}
+                    <button type="submit">Save Changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

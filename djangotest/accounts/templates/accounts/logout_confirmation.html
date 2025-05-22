@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Logout Confirmation{% endblock %}
+
+{% load static %}
+
+{% block styles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'account.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class='main'>
+        <div class='container'>
+            <h2>Logout Confirmation</h2>
+            <p>Are you sure you want to log out?</p>
+            <form action={% url 'logout' %} method="post">
+                {% csrf_token %}
+                <button type="submit">Yes, log me out</button>
+            </form>
+            <a href="{% url 'home' %}">Cancel</a>
+        </div>
+    </div>
+{% endblock %}

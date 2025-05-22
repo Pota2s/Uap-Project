@@ -10,16 +10,13 @@
 </head>
 <body>
     <nav class="navbar">
-        <img src="{% static 'logo.png' %}" style = "height: 60px;width: auto;" alt="Logo" class="logo">
+        <a href="{% url 'home' %}"><img src="{% static 'logo.png' %}" style = "height: 60px;width: auto;" alt="Logo" class="logo"></a>
         <div class="nav-links">
-        <a href="{% url 'home'%}" class="home">HOME</a>
+        <a href="{% url 'user_home'%}" class="home">HOME</a>
         <a href="{% url 'global_store' %}">CATEGORIES</a> 
-        <a href="{% url 'cart' %}">CART</a>
         {% if user.is_authenticated %}
-            <form action="{%url 'logout'%}" method="post">
-                {% csrf_token %}
-                <button type="submit">Log out</button>
-            </form>
+            <a href="{% url 'cart' %}">CART</a>
+            <a href="{% url 'logout_confirmation' %}" class="logout">LOGOUT</a>
         {% else %}
             <a href="/accounts/login/"class="login">LOGIN</a>
         {% endif %}
@@ -28,4 +25,9 @@
     {% block content %}
     
     {% endblock %}
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2023 Uap Project. All rights reserved.</p>
+            <p>Contact us:
+    </footer>
 </body>

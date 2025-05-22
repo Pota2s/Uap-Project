@@ -4,15 +4,23 @@
 
 {% load static %}
 
-{% block styles%}
+{% block styles %}
     <link rel="stylesheet" type="text/css" href="{% static 'user.css' %}">
-{% endblock%}
-{% block content %}
+{% endblock %}
 
+{% block navbar %}
+{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
     <div class="main">
         <div class="container">
             <div class="side-to-side">
                 <h1>{{ user.username }}</h1>
+                <p><a href="{% url 'user_edit' %}">Edit Profile</a></p>
+            </div>
+            <div class="side-to-side">
+                <p><a href="{% url 'add_funds' %}">Balance : {{ user.wallet }}$</a></p>
             </div>
             <h2>Wishlist</h2>
             <ul>
@@ -32,6 +40,9 @@
             </ul>
         </div>
     </div>
-
-
+{% else %}
+    <h1>Please log in to view your profile.</h1>
+    <p><a href="{% url 'login' %}">Log in</a></p>
+{% endif %}
 {% endblock %}
+

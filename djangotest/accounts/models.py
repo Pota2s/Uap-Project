@@ -5,7 +5,7 @@ class CustomUser(AbstractUser):
     pass
 
     wallet = models.FloatField(null=True,default=0.0)
-
+    
     def __repr__(self):
         return repr(super())
     

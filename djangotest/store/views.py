@@ -34,6 +34,13 @@ def productView(request : HttpRequest, product_id : int, store_id : int):
     except models.Order.DoesNotExist:
         context['is_in_cart'] = False
 
+    context['is_owned'] = False
+    try:
+        models.LibraryItem.objects.get(product=context['product'],user=request.user)
+        context['is_owned'] = True
+    except models.LibraryItem.DoesNotExist:
+        context['is_owned'] = False
+
     return render(request=request,template_name='store/product.html',context=context)
 
 def storeView(request : HttpRequest,store_id : int):
@@ -168,6 +175,10 @@ def cartView(request : HttpRequest):
     context['cart'] = list(models.Order.objects.filter(user=request.user))
     if request.method == 'POST':
         for order in context['cart']:
+            models.LibraryItem.objects.create(
+                user = request.user,
+                product = order.product
+            )
             order.delete()
         return redirect('cart')
 

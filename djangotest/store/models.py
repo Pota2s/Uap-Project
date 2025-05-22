@@ -31,3 +31,8 @@ class Order(models.Model):
 class WishList(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE,null=True)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
+
+class LibraryItem(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE,null=True)
+    product = models.ForeignKey(Product,on_delete=models.CASCADE)
+

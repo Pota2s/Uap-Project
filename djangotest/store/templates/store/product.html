@@ -9,6 +9,8 @@
     {% if user.is_authenticated %}
         {% if product.store.owner == user or user in store_members %}
             <a href="{% url 'product_edit' product.store.id product.id %}">Edit Product</a>
+        {% elif is_owned %}
+            <p>You own this product.</p>
         {% else %}
             {% if is_wishlisted %}
             <p>This product is in your wishlist.</p>
