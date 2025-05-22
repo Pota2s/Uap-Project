@@ -1,13 +1,12 @@
 body {
-    background: #1C1C1C;
-    background: linear-gradient(90deg, rgba(28, 28, 28, 1) 0%, rgba(26, 22, 22, 1) 100%);   
+    background: #1C1C1C;   
     font-family: Arial, Helvetica, sans-serif;
 }
 
 .cart-text{
+    background: radial-gradient(circle,rgba(192, 139, 67, 1) 0%, rgba(255, 206, 70, 1) 50%, rgba(192, 139, 67, 1) 100%);
     color: #3B3B3B;
-    padding: 20px;
-    background: radial-gradient(circle,rgba(255, 224, 2, 1) 0%, rgba(255, 182, 6, 1) 50%, rgba(178, 130, 40, 1) 100%);      
+    padding: 20px;     
     margin-bottom: 10px;
 }
 
@@ -42,39 +41,20 @@ body {
 
 /*  PRODUCT CARD STYLES */
 div.product-card {
-    border-radius: 10px;
-    padding: 10px;
-    margin: 10px;
-    background-color: #FFE8A7   ;
     display: flex;
-    align-items: center;
-
-    img {
-        width: 100px;
-        height: 100px;
-        border-radius: 20px;
-        margin-right: 20px;
-        background-color: white;
-    }
-
-    a {
-    color: #123c69;
-    } 
-
-    p {
-    color: #123c69;
-    }
-
-    form {
-        margin-left: auto;
-    }
+    align-items: start;
 }
 
-.product-card-content{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+div.product-card a {
+    color: #123c69;
+}
+
+div.product-card p {
+    color: #123c69;
+}
+
+div.product-card button {
+    color: #123c69;
 }
 
 /*  CATEGORY LIST – LIKE A SIDEBAR */
@@ -115,7 +95,7 @@ div.checkout-button {
 
 h2.text{
     color: #123c69;
-    background: radial-gradient(circle,rgba(255, 224, 2, 1) 0%, rgba(255, 182, 6, 1) 50%, rgba(178, 130, 40, 1) 100%);
+    background: radial-gradient(circle,rgba(192, 139, 67, 1) 0%, rgba(255, 206, 70, 1) 50%, rgba(192, 139, 67, 1) 100%);
     font-size: 32px;
     padding: 20px 20px ;
 }
