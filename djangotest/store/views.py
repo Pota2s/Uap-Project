@@ -127,7 +127,7 @@ def productCreateView(request : HttpRequest,store_id):
 
 def productEditView(request : HttpRequest,product_id : int,store_id : int):
     ctx : dict = dict()
-    ctx['form'] = ProductForm()
+    ctx['form'] = ProductForm(instance=models.Product.objects.get(pk=product_id))
     store = models.Store.objects.get(pk=store_id)
     product = models.Product.objects.get(pk=product_id)
     store_members = models.StoreMember.objects.filter(store=store)

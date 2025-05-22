@@ -4,51 +4,65 @@
 
 {% block title %}{{product.name}}{% endblock %}
 
+{% block styles %}
+    <link rel="stylesheet" href= {% static 'product.css' %}>
+{% endblock %}
+
 {% block content %}
-
-    {% if user.is_authenticated %}
-        {% if product.store.owner == user or user in store_members %}
-            <a href="{% url 'product_edit' product.store.id product.id %}">Edit Product</a>
-        {% elif is_owned %}
-            <p>You own this product.</p>
-        {% else %}
-            {% if is_wishlisted %}
-            <p>This product is in your wishlist.</p>
-            <form method="post" action="{% url 'remove_from_wishlist' store.id product.id %}">
-                {% csrf_token %}
-                <button type="submit">Remove from Wishlist</button>
-            </form>
+<div class="main"> 
+    <div class="container">
+        
+        
+        <div class="side-to-side">        
+            {% if product.thumbnail %}
+            <img src="{{product.thumbnail.url}}" alt="Product Image">
             {% else %}
-            <form method="post" action="{% url 'add_to_wishlist' store.id product.id %}">
-                {% csrf_token %}
-                <button type="submit">Add to Wishlist</button>
-            </form>
-            {% endif%}
-
-            {% if is_in_cart %}
-            <p>This product is in your cart.</p>
-            <form method="post" action="{% url 'remove_from_cart' store.id product.id %}">
-                {% csrf_token %}
-                <button type="submit">Remove from Cart</button>
-            </form>
-            {% else %}
-            <form method="post" action="{% url 'add_to_cart' store.id product.id %}">
-                {% csrf_token %}
-                <button type="submit">Add to Cart</button>
-            </form>
+            <img src="{% static 'default.svg' %}" style="width: 128px; height: auto;" alt="Default Image">
             {% endif %}
-        {% endif %}
-    {% endif %}
-    
-    <h1>{{product.name}}</h1>
-    {% if product.thumbnail %}
-        <img src="{{product.thumbnail.url}}" alt="Product Image">
-    {% else %}
-        <img src="{% static 'default.svg' %}" style="width: 128px; height: auto;" alt="Default Image">
-    {% endif %}
-    <p>Price: {{product.price}}$</p>
-    {% if product.description != "" %}
-    <h2>Description</h2>
-    <p>{{product.description}}<p>    
-    {% endif %}
+            <h1>{{product.name}}</h1>
+            
+            {% if user.is_authenticated %}
+                    <div class="controls">
+                    {% if product.store.owner == user or user in store_members %}
+                        <a href="{% url 'product_edit' product.store.id product.id %}">Edit Product</a>
+                    {% elif is_owned %}
+                        <p>You own this product.</p>
+                    {% else %}
+                        {% if is_wishlisted %}
+                        <p>This product is in your wishlist.</p>
+                        <form method="post" action="{% url 'remove_from_wishlist' store.id product.id %}">
+                            {% csrf_token %}
+                            <button type="submit">Remove from Wishlist</button>
+                        </form>
+                        {% else %}
+                        <form method="post" action="{% url 'add_to_wishlist' store.id product.id %}">
+                            {% csrf_token %}
+                            <button type="submit">Add to Wishlist</button>
+                        </form>
+                        {% endif%}
+
+                        {% if is_in_cart %}
+                        <p>This product is in your cart.</p>
+                        <form method="post" action="{% url 'remove_from_cart' store.id product.id %}">
+                            {% csrf_token %}
+                            <button type="submit">Remove from Cart</button>
+                        </form>
+                        {% else %}
+                        <form method="post" action="{% url 'add_to_cart' store.id product.id %}">
+                            {% csrf_token %}
+                            <button type="submit">Add to Cart</button>
+                        </form>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            {% endif %}
+            </div>
+
+            <p>Price: {{product.price}}$</p>
+            {% if product.description != "" %}
+            <h2>Description</h2>
+            <p>{{product.description}}<p>  
+            {% endif %}
+        </div>
+    </div>  
 {% endblock %}
