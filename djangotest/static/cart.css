@@ -74,7 +74,12 @@ div.product-card {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
+
+    p{
+        margin: 0px 2px;
+    }
+
 }
 
 /*  CATEGORY LIST – LIKE A SIDEBAR */

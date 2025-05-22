@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title%}
+{{ user.username }}
+{% endblock %}
+
+{% load static %}
+
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'account.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="main">
+        <div class="container">
+            <h2>Add funds</h2>
+            
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div id="io">
+                        <div class="verticalflex">
+                            <label for="amount">{{ form.amount.label_tag }}</label>
+                        </div>
+                        <div class="verticalflex">
+                            {{ form.amount }}
+                        </div>
+                    </div>
+                    {% if form.non_field_errors %}
+                        <p style="color: red;">{{ form.non_field_errors }}</p>
+                    {% endif %}
+                    {% if form.amount.errors %}
+                        <p style="color: red;">{{ form.amount.errors }}</p>
+                    {% endif %}
+                    <button type="submit">Save Changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

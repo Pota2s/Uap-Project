@@ -6,7 +6,7 @@ from .forms import StoreForm,ProductForm
 # Create your views here.
 def productView(request : HttpRequest, product_id : int, store_id : int):
     context = dict()
-    
+
     try:
         context['store'] = models.Store.objects.get(pk=store_id)
         context['store_members'] = models.StoreMember.objects.filter(store=context['store'])
@@ -18,6 +18,9 @@ def productView(request : HttpRequest, product_id : int, store_id : int):
     except models.Product.DoesNotExist:
         raise Http404("Product does not exist.")
 
+    if not request.user.is_authenticated:
+        return render(request=request,template_name='store/product.html',context=context)
+    
     context['is_wishlisted'] = False
 
     try:

@@ -28,41 +28,42 @@
                     {% elif is_owned %}
                         <p>You own this product.</p>
                     {% else %}
-                        {% if is_wishlisted %}
-                        <p>This product is in your wishlist.</p>
-                        <form method="post" action="{% url 'remove_from_wishlist' store.id product.id %}">
-                            {% csrf_token %}
-                            <button type="submit">Remove from Wishlist</button>
-                        </form>
-                        {% else %}
-                        <form method="post" action="{% url 'add_to_wishlist' store.id product.id %}">
-                            {% csrf_token %}
-                            <button type="submit">Add to Wishlist</button>
-                        </form>
-                        {% endif%}
-
-                        {% if is_in_cart %}
-                        <p>This product is in your cart.</p>
-                        <form method="post" action="{% url 'remove_from_cart' store.id product.id %}">
-                            {% csrf_token %}
-                            <button type="submit">Remove from Cart</button>
-                        </form>
-                        {% else %}
-                        <form method="post" action="{% url 'add_to_cart' store.id product.id %}">
-                            {% csrf_token %}
-                            <button type="submit">Add to Cart</button>
-                        </form>
-                        {% endif %}
+                        
                     {% endif %}
-                </div>
-            {% endif %}
             </div>
-
-            <p>Price: {{product.price}}$</p>
-            {% if product.description != "" %}
-            <h2>Description</h2>
-            <p>{{product.description}}<p>  
             {% endif %}
         </div>
+        {% if user.is_authenticated %}
+            {% if is_wishlisted %}
+                <p>This product is in your wishlist.</p>
+                <form method="post" action="{% url 'remove_from_wishlist' store.id product.id %}">
+                    {% csrf_token %}
+                    <button type="submit">Remove from Wishlist</button>
+                </form>
+                {% else %}
+                <form method="post" action="{% url 'add_to_wishlist' store.id product.id %}">
+                    {% csrf_token %}
+                    <button type="submit">Add to Wishlist</button>
+                </form>
+                {% endif%}
+
+                {% if is_in_cart %}
+                <p>This product is in your cart.</p>
+                <form method="post" action="{% url 'remove_from_cart' store.id product.id %}">
+                    {% csrf_token %}
+                    <button type="submit">Remove from Cart</button>
+                </form>
+                {% else %}
+                <form method="post" action="{% url 'add_to_cart' store.id product.id %}">
+                    {% csrf_token %}
+                    <button type="submit">Add to Cart</button>
+                </form>
+            {% endif %}
+        {% endif %}
+            <p>Price: {{product.price}}$</p>
+        {% if product.description != "" %}
+            <h2>Description</h2>
+            <p>{{product.description}}<p>  
+        {% endif %}
     </div>  
 {% endblock %}

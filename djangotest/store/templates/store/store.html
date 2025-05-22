@@ -14,7 +14,7 @@
     {% for product in products %}
     <a href="{% url 'product' store.id product.id %}"><h2>{{product.name}}</h2></a>
     
-    {% if product.description != "" %}
+    {% if product.description %}
     <p>{{product.description}}</p>
     {% endif %}
     

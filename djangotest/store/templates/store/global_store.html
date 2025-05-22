@@ -27,8 +27,19 @@
                 {% endif %}
                 <div class="product-card-content">
                     <a href="{% url 'product' store_id=product.store.id product_id=product.id %}"><h4>{{product.name}}</h4></a>
-                    <p>{{product.price}}$</p>
+                    {% if product.description %}
+                        <p>{{ product.description|truncatewords:15 }}</p>
+                    {% endif %}
+                    <p>
+                        <strong>Price:</strong> {{ product.price|floatformat:2 }} $
+                    </p>
+                    {% if product.store %}
+                        <p class="store-name">
+                            <small>Sold by: {{ product.store.name }}</small>
+                        </p>
+                    {% endif %}
                 </div>
+                
                 <form method="post" action="{% url 'add_to_cart' store_id=product.store.id product_id=product.id %}">
                     {% csrf_token %}
                     <button class="add-to-cart" type="submit">Add to Cart</button>
