@@ -2,50 +2,43 @@
 
 {% block title%}Sign Up{% endblock %}
 
-{% load static %}
-
-{% block styles %}
-    <link rel="stylesheet" href="{% static 'account.css' %}">
-{% endblock %}
-
-{% block navbar %}
-{% endblock %}
-
 {% block content %}
-<div class="main">
-    <div class="container">
-        <h2>Sign Up</h2>
-        <form method="post">
-            {% csrf_token %}
-            <div id="io">
-                <div class="vertical-flex left-justify">
-                    {{form.username.label_tag}}
-                    {{form.password1.label_tag}}
-                    {{form.password2.label_tag}}
-                    {{form.email.label_tag}}
-                </div>
-                <div class="verticalflex">
-                    {{form.username}}
-                    {{form.password1}}
-                    {{form.password2}}
-                    {{form.email}}
-                </div>
-            </div>
-            {% if form.non_field_errors %}
-                <div class="error">
-                    {{ form.non_field_errors }}
-                </div>
-            {% endif %}
-            {% for field in form %}
-                {% for error in field.errors %}
-                    <div class="error">
-                        {{ error }}
-                    </div>
-                {% endfor %}
-            {% endfor %}
-            <button type="submit">Register</button>
-        </form>
-        <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
+<link rel="stylesheet" href="../../static/regist.css">
+
+<form method="post">
+    {% csrf_token %}
+    
+    <div class="signup-form">
+        <h2 class="signtitle">Sign Up</h2>
+
+        <label for="id_username">Username:</label>
+        <input type="text" name="username" id="id_username" required><br><br>
+    
+        <label for="id_email">Email:</label>
+        <input type="email" name="email" id="id_email" required><br><br>
+    
+        <label for="id_password1">Password:</label>
+        <input type="password" name="password1" id="id_password1" required><br><br>
+    
+        <label for="id_password2">Confirm Password:</label>
+        <input type="password" name="password2" id="id_password2" required><br><br>
+    
+        <label for="id_dob">Date of Birth:</label>
+        <input type="date" name="dob" id="id_dob" required><br><br>
+    
+        <label>
+            <input type="checkbox" name="agree" required>
+            I agree to the terms and conditions
+        </label><br>
+    
+        <button class="regisbtn" type="submit">Register</button>
     </div>
-</div>
+    {{form}}
+</form>
 {% endblock %}
+
+
+
+{% comment %} Code here {% endcomment %}
+{% comment %} can it connect to the styles in the base.html? {% endcomment %}
+
