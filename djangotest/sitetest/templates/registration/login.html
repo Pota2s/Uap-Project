@@ -1,26 +1,41 @@
 {% extends "base.html" %}
 
+{% load static %}
+{% block styles %}    
+    <link rel="stylesheet" type="text/css" href="{% static 'default.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'account.css' %}">
+{% endblock %}
+
 {% block title%}Login{% endblock %}
 
 {% block content %}
-<link rel="stylesheet" href="../../static/regist.css">
-
-<form method="post">
-    {% csrf_token %}
-    
-    <div class="signup-form">
-        <h2 class="signtitle">Login</h2>
-
-        <label for="id_username">Username/Email</label>
-        <input type="text" name="username" id="id_username" required><br><br>
-    
-    
-        <label for="id_password">Password:</label>
-        <input type="password" name="password1" id="id_password" required><br><br>
-    
-    
-        <button class="regisbtn" type="submit">Login</button>
+<div class="main">
+    <div class="container">
+        <h2>Login</h2>
+        <form method="post">
+            {% csrf_token %}
+            <div id="io">
+                <div class = "verticalflex">
+                    <label for="username">{{form.username.label_tag}}</label>
+                    <label for="password">{{form.password.label_tag}}</label>
+                </div>
+                <div class = "verticalflex">
+                     {{form.username}}
+                     {{form.password}}
+                </div>
+            </div>
+            {% if form.non_field_errors %}
+                <p style="color: red;">{{ form.non_field_errors }}</p>
+            {% endif %}
+            {% if form.username.errors %}
+                <p style="color: red;">{{ form.username.errors }}</p>
+            {% endif %}
+            {% if form.password.errors %}
+                <p style="color: red;">{{ form.password.errors }}</p>
+            {% endif %}
+            <button type="submit">Log in</button>
+        </form>
+        <p>Don't have an account? <a href="{% url 'signup' %}">Register here</a></p>
     </div>
-    {{form}}
-</form>
+</div>
 {% endblock %}
