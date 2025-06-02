@@ -1,0 +1,44 @@
+.payment-container {
+    max-width: 600px;
+    margin: 3rem auto;
+    padding: 2rem;
+    background-color: #1a1a1a;
+    color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #d4af37;
+    text-align: center;
+}
+
+.payment-container h2 {
+    margin-bottom: 2rem;
+    color: orange;
+}
+
+.payment-box {
+    background-color: #ffe7aa;
+    color: black;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    font-size: 1.2rem;
+}
+
+.summary-line {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+}
+
+.confirm-btn {
+    background: linear-gradient(to right, #d89b2b, #b7852f);
+    border: none;
+    padding: 0.75rem 2rem;
+    font-weight: bold;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.confirm-btn:hover {
+    background: #a4741a;
+}
