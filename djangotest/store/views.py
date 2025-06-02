@@ -195,3 +195,14 @@ def globalStoreView(request : HttpRequest):
     ctx = dict()
     ctx['products'] = models.Product.objects.all().order_by('-id')
     return render(request=request,template_name='store/global_store.html',context=ctx)
+
+def payment_view(request):
+    # Dummy data for now — replace with real cart logic if needed
+    total_items = 3
+    total_price = 999
+
+    context = {
+        'total_items': total_items,
+        'total_price': total_price,
+    }
+    return render(request, 'store/payment.html', context)
