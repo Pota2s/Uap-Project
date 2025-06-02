@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Payment{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'payment.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="payment-container">
+    <h2>Payment Summary</h2>
+
+    <div class="payment-box">
+        <div class="summary-line">
+            <span>Total Items:</span>
+            <span>x{{ total_items }}</span>
+        </div>
+        <div class="summary-line">
+            <span>Total Amount:</span>
+            <span>${{ total_price }}</span>
+        </div>
+    </div>
+
+    <form method="post" class="confirm-form">
+        {% csrf_token %}
+        <button type="submit" class="confirm-btn">Confirm Payment</button>
+    </form>
+</div>
+{% endblock %}
