@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect
 from django.http import Http404, HttpRequest
+from django.contrib import messages
 from . import models
 from .forms import StoreForm,ProductForm
 
@@ -110,20 +111,19 @@ def productCreateView(request : HttpRequest,store_id):
         raise Http404("You are not the owner or a member of this store.")
 
     if request.method == 'POST':
-        form = ProductForm(request.POST)
+        form = ProductForm(request.POST,request.FILES)
         if form.is_valid():
             if models.Product.objects.filter(store = store_id, name = form.cleaned_data['name']).exists():
                 form.add_error('name','Product with this name already exists.')
                 return render(request=request,template_name='store/product_create.html',context=ctx)
 
-            models.Product.objects.create(
+            product = models.Product.objects.create(
                 name = form.cleaned_data['name'],
                 description = form.cleaned_data['description'],
                 price = form.cleaned_data['price'],
-                store = models.Store.objects.get(pk=store_id)
+                store = models.Store.objects.get(pk=store_id),
+                thumbnail = form.cleaned_data.get('thumbnail')
                 )
-            
-            product = models.Product.objects.get(name = form.cleaned_data['name'])
             return redirect('product',store_id = store_id,product_id=product.id)
 
     return render(request=request,template_name='store/product_create.html',context=ctx)
@@ -135,16 +135,16 @@ def productEditView(request : HttpRequest,product_id : int,store_id : int):
     product = models.Product.objects.get(pk=product_id)
     store_members = models.StoreMember.objects.filter(store=store)
 
+    print("DEBUG : BEGIN")
     if request.user != store.owner and request.user not in store_members:
         raise Http404("You are not the owner or a member of this store.")
     
+
     if request.method == 'POST':
-        form = ProductForm(request.POST,instance=product)
+        form = ProductForm(request.POST,request.FILES,instance=product)
         if form.is_valid():
-            product.name = form.cleaned_data['name']
-            product.description = form.cleaned_data['description']
-            product.price = form.cleaned_data['price']
-            product.thumbnail = form.cleaned_data['thumbnail']
+            form.save()
+            print("DEBUG :", product.thumbnail.url)
             product.save()
             return redirect('product',store_id=store_id,product_id=product.id)
     
@@ -176,15 +176,7 @@ def cartView(request : HttpRequest):
         return render(request=request,template_name='store/cart.html',context=dict())
     context = dict()
     context['cart'] = list(models.Order.objects.filter(user=request.user))
-    if request.method == 'POST':
-        for order in context['cart']:
-            models.LibraryItem.objects.create(
-                user = request.user,
-                product = order.product
-            )
-            order.delete()
-        return redirect('cart')
-
+    
     context['total_price'] = 0.0
     for order in context['cart']:
         context['total_price'] += order.product.price # type: ignore
@@ -196,13 +188,35 @@ def globalStoreView(request : HttpRequest):
     ctx['products'] = models.Product.objects.all().order_by('-id')
     return render(request=request,template_name='store/global_store.html',context=ctx)
 
-def payment_view(request):
-    # Dummy data for now — replace with real cart logic if needed
-    total_items = 3
-    total_price = 999
+def paymentView(request : HttpRequest):
+    
+    ctx : dict = dict()
+    ctx['cart'] = []
+    ctx['total_price'] = 0
 
-    context = {
-        'total_items': total_items,
-        'total_price': total_price,
-    }
-    return render(request, 'store/payment.html', context)
+    for order in models.Order.objects.filter(user = request.user):
+        ctx['cart'].append(order)
+        ctx['total_price'] += order.product.price # type: ignore
+
+    if request.method == 'POST':
+        if request.user.wallet < ctx['total_price']: # type: ignore
+            messages.error(request,"You do not have enough money.")
+            return render(request, 'store/payment.html', context=ctx)
+        
+        for order in ctx['cart']:
+
+            if models.LibraryItem.objects.exists(user = request.user,product = order.product): #type: ignore
+                order.delete()  
+                continue
+
+            models.LibraryItem.objects.create(
+                user = request.user,
+                product = order.product
+            )
+
+            order.delete()
+        return redirect('cart')
+
+    ctx['total_items'] = len(ctx['cart'])
+    
+    return render(request, 'store/payment.html', context = ctx)

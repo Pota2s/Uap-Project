@@ -36,10 +36,7 @@
     
 
     <h2>Total Price: {{ total_price }}$</h2>
-    <form method="post">
-        {% csrf_token %}
-        <button type="submit">Checkout</button>
-    </form>
+    <a href="{% url 'payment' %}">Checkout</a>
     {% else %}
     <p>Please <a href="{% url 'login' %}">log in</a> to view your cart.</p>
     {% endif %}

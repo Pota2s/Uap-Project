@@ -15,9 +15,9 @@
         
         <div class="side-to-side">        
             {% if product.thumbnail %}
-            <img src="{{product.thumbnail.url}}" alt="Product Image">
+                <img src="{{product.thumbnail.url}}" style="width: 128px; height: auto;" alt="Product Image">
             {% else %}
-            <img src="{% static 'default.svg' %}" style="width: 128px; height: auto;" alt="Default Image">
+                <img src="{% static 'default.svg' %}" style="width: 128px; height: auto;" alt="Default Image">
             {% endif %}
             <h1>{{product.name}}</h1>
             
