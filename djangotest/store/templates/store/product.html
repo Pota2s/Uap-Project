@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'product.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="product-page">
+    <div class="product-container">
+
+        <!-- LEFT: Product Image -->
+        <div class="product-image">
+            {% if product.thumbnail %}
+                <img src="{{ product.thumbnail.url }}" alt="{{ product.name }}">
+            {% else %}
+                <img src="{% static 'default.svg' %}" alt="Default Product Image">
+            {% endif %}
+        </div>
+
+        <!-- RIGHT: Product Info -->
+        <div class="product-info">
+            <h1>{{ product.name }}</h1>
+            <p class="price">${{ product.price }}</p>
+
+            {% if product.description %}
+                <h3>Description</h3>
+                <p>{{ product.description }}</p>
+            {% endif %}
+
+            {% if user.is_authenticated %}
+                <div class="action-buttons">
+                    {% if product.store.owner == user or user in store_members %}
+                        <a href="{% url 'product_edit' product.store.id product.id %}" class="btn edit">Edit Product</a>
+                    {% elif is_owned %}
+                        <p class="info-text">You own this product.</p>
+                    {% endif %}
+
+                    <div class="button-group">
+                        {% if is_in_cart %}
+                            <form method="post" action="{% url 'remove_from_cart' store.id product.id %}">
+                                {% csrf_token %}
+                                <button type="submit" class="btn danger">Remove from Cart</button>
+                            </form>
+                        {% else %}
+                            <form method="post" action="{% url 'add_to_cart' store.id product.id %}">
+                                {% csrf_token %}
+                                <button type="submit" class="btn primary">Add to Cart</button>
+                            </form>
+                        {% endif %}
+
+                        {% if is_wishlisted %}
+                            <form method="post" action="{% url 'remove_from_wishlist' store.id product.id %}">
+                                {% csrf_token %}
+                                <button type="submit" class="btn danger">Remove from Wishlist</button>
+                            </form>
+                        {% else %}
+                            <form method="post" action="{% url 'add_to_wishlist' store.id product.id %}">
+                                {% csrf_token %}
+                                <button type="submit" class="btn gold">Add to Wishlist</button>
+                            </form>
+                        {% endif %}
+                    </div>
+                </div>
+
+            {% endif %}
+        </div>
+
+    </div>
+</div>
+{% endblock %}

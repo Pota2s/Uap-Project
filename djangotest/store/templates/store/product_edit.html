@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Edit {{ product.name }}{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'product.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="product-page">
+    <div class="product-container">
+        <div class="product-info">
+            <h1>Edit Product: {{ product.name }}</h1>
+
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+
+                <div class="action-buttons" style="margin-top: 20px;">
+                    <button type="submit" class="btn primary">Save Changes</button>
+                    <a href="{% if product and product.store %}{% url 'product' product.store.id product.id %}{% else %}#{% endif %}" class="btn secondary">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
