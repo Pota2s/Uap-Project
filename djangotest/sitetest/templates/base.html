@@ -9,25 +9,98 @@
     {% endblock %}  
 </head>
 <body>
-    <nav class="navbar">
-        <a href="{% url 'home' %}"><img src="{% static 'logo.png' %}" style = "height: 60px;width: auto;" alt="Logo" class="logo"></a>
-        <div class="nav-links">
-        <a href="{% url 'user_home'%}" class="home">HOME</a>
-        <a href="{% url 'global_store' %}">CATEGORIES</a> 
-        {% if user.is_authenticated %}
-            <a href="{% url 'cart' %}">CART</a>
+<header class="header-area">
+    <nav class="main-nav">
+        <a href="{% url 'home' %}">
+            <img src="{% static 'assets/logo.png' %}" style="height: 100px;width: auto;" alt="Logo" class="logo">
+        </a>
+        <ul class="nav">
+    <li><a href="{% url 'home'%}" class="active">Home</a></li>
+    <li><a href="{% url 'global_store' %}">Categories</a></li>
+    {% if user.is_authenticated %}
+        <li><a href="{% url 'cart' %}">CART</a></li>
+        <li>
+            <a href="{% url 'user_home' %}" class="profile-link">
+                <img src="{% static 'assets/default.svg' %}" style="height: 50px; width: 50px; background: tran;" alt="Profile">
+            </a>
+        </li>
+        <li>
             <a href="{% url 'logout_confirmation' %}" class="logout">LOGOUT</a>
-        {% else %}
-            <a href="/accounts/login/"class="login">LOGIN</a>
-        {% endif %}
-        </div>
+        </li>
+    {% else %}
+        <li><a href="/accounts/login/" class="login">LOGIN</a></li>
+    {% endif %}
+</ul>
     </nav>
+</header>
+
     {% block content %}
     
     {% endblock %}
-    <footer>
-        <div class="footer-content">
-            <p>&copy; 2023 Uap Project. All rights reserved.</p>
-            <p>Contact us:
-    </footer>
+<footer>
+    <div class="footer">
+        <div class="footleft">
+            <img src="{% static 'assets/logo.png' %}" width="200px">
+            <br><br><br><br>
+            <p>
+                Universitas Bina Nusantara, atau juga dikenal dengan 
+                Binus University, merupakan salah satu universitas swasta 
+                yang berlokasi di Jakarta, Indonesia. Berawal dari sebuah 
+                institusi pelatihan komputer Modern Computer Course pada 
+                21 Oktober 1974, dan berkembang dan akhirnya berubah menjadi 
+                Universitas pada 8 Agustus 1996, Universitas Bina Nusantara.
+            </p>
+        </div>
+        
+        <div class="footcenter">
+            <p>
+                <p style="font-size: 25px;"><b>Address</b></p>
+                Jl. Kebon Jeruk Raya No.27, RT.1/RW.2, Kb. Jeruk, 
+                Kec. Kb. Jeruk, Kota Jakarta Barat, 
+                Daerah Khusus Ibukota Jakarta 11530 <br><br>
+            </p>
+            <div id="contact">
+                <p>
+                    <img src="{% static 'assets/call.png' %}">(+62) 8041 6969 69 <br>
+                    <img src="{% static 'assets/email.png' %}">pmb@binus.edu
+                </p>
+            </div>
+
+            <div class="socialmedia">
+                <div class="social">
+                    <img src="{% static 'assets/Facebook.png' %}">
+                    <a href="https://www.facebook.com/universitasbinanusantara/">
+                        Uap Market
+                    </a>
+                </div>
+                <div class="social">
+                    <a href="https://www.instagram.com/binusuniversityofficial/">
+                        <img src="{% static 'assets/Instagram.png' %}">
+                        @UapMarket
+                    </a>
+                </div>
+                <div class="social">
+                    <a href="https://www.youtube.com/channel/UCBgk_lJ4R9yD9D82G3O_3sA">
+                    <img src="{% static 'assets/Youtube.png' %}" >
+                        UAP Market
+                    </a>
+                </div>
+            </div>  
+        </div>
+
+        <div class="footright">
+            <div class="about">
+                <p style="font-size: 25px;">
+                    <b>About</b>
+                </p>
+                <p>
+                    Kami mahasiswa dari jurusan Multimedia system
+                    membuat project akhir berupa Shortfilm yang berjudul
+                    "Time Loop" yang menceritakan tentang dua orang sahabat
+                    yang terjebak dalam time loop.
+                </p>
+            </div>
+        </div>
+</footer>
+
 </body>

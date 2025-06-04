@@ -4,6 +4,8 @@ from . import models
 from .forms import StoreForm,ProductForm
 
 # Create your views here.
+
+
 def productView(request : HttpRequest, product_id : int, store_id : int):
     context = dict()
 
@@ -206,3 +208,7 @@ def payment_view(request):
         'total_price': total_price,
     }
     return render(request, 'store/payment.html', context)
+
+def homeView(request):
+    products = models.Product.objects.all().order_by('-id')
+    return render(request, 'home.html', {'products': products})
