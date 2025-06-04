@@ -99,7 +99,7 @@ div.verticalflex {
 
 button[type="submit"] {
   padding: 10px 20px;
-  background-color: #ffbb00;
+  background-color: #ff1818;
   border: none;
   color: #000;
   font-weight: bold;
@@ -110,7 +110,7 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
-  background-color: #e6a800;
+  background-color: #e65858;
 }
 
 .errorlist,
@@ -146,4 +146,23 @@ a:hover {
   align-items: center;
   justify-content: center;
   margin: 40px auto;
+}
+
+/* ====================logout confirm==================== */
+
+.cancel-btn {
+  padding: 10px 20px;
+  background-color: #6afa31;
+  border: none;
+  color: #000;
+  font-weight: bold;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.cancel-btn:hover {
+  background-color: #4bb621;
+  text-decoration: none;
 }
