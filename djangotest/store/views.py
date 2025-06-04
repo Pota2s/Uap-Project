@@ -5,7 +5,10 @@ from . import models
 from .forms import StoreForm,ProductForm
 
 # Create your views here.
-
+def homeView(request):
+    context = dict()
+    context['products'] = models.Product.objects.all().order_by('-id')
+    return render(request, 'home.html', context)
 
 def productView(request : HttpRequest, product_id : int, store_id : int):
     context = dict()
@@ -131,26 +134,33 @@ def productCreateView(request : HttpRequest,store_id):
     return render(request=request,template_name='store/product_create.html',context=ctx)
 
 def productEditView(request : HttpRequest,product_id : int,store_id : int):
-    ctx : dict = dict()
-    ctx['form'] = ProductForm(instance=models.Product.objects.get(pk=product_id))
-    store = models.Store.objects.get(pk=store_id)
-    product = models.Product.objects.get(pk=product_id)
-    store_members = models.StoreMember.objects.filter(store=store)
+    try:
+        product = models.Product.objects.get(pk=product_id)
+        store = models.Store.objects.get(pk=store_id)
+    except models.Product.DoesNotExist:
+        raise Http404("Product does not exist.")
+    except models.Store.DoesNotExist:
+        raise Http404("Store does not exist.")
 
-    print("DEBUG : BEGIN")
-    if request.user != store.owner and request.user not in store_members:
+    if request.user != store.owner and not models.StoreMember.objects.filter(store=store, user=request.user).exists():
         raise Http404("You are not the owner or a member of this store.")
     
+    ctx = {
+        'product': product,
+        'store': store,
+    }
 
     if request.method == 'POST':
-        form = ProductForm(request.POST,request.FILES,instance=product)
+        form = ProductForm(request.POST, request.FILES, instance=product)
         if form.is_valid():
             form.save()
-            print("DEBUG :", product.thumbnail.url)
-            product.save()
-            return redirect('product',store_id=store_id,product_id=product.id)
+            return redirect('product', store_id=store.id, product_id=product.id)
+        else:
+            ctx['form'] = form # Pass invalid form back to template
+    else:
+        ctx['form'] = ProductForm(instance=product) # Initial form for GET request
     
-    return render(request=request,template_name='store/product_edit.html',context=ctx)
+    return render(request=request, template_name='store/product_edit.html', context=ctx)
 
 def addToWishList(request : HttpRequest,product_id : int,store_id : int):
     if request.user.is_authenticated:
@@ -185,10 +195,10 @@ def cartView(request : HttpRequest):
 
     return render(request=request,template_name='store/cart.html',context=context)
 
-def globalStoreView(request : HttpRequest):
+def globalStoreView(request):
     ctx = dict()
     ctx['products'] = models.Product.objects.all().order_by('-id')
-    return render(request=request,template_name='store/global_store.html',context=ctx)
+    return render(request, 'store/global_store.html', ctx)
 
 def paymentView(request : HttpRequest):
     
