@@ -16,6 +16,7 @@ urlpatterns = [
     path("<int:store_id>/products/<int:product_id>/remove_from_cart",views.removeFromCart, name="remove_from_cart"),
     path("cart",views.cartView, name="cart"),
     path('payment', views.paymentView, name='payment'),
+    path('store/', views.globalStoreView, name='global_store')
 
 ]
 
