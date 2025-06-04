@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'home_product.css' %}">
+{% endblock %}
+
+{% block title%}Home{% endblock %}
+
+{% block content%}
+    <div class="top-content">
+        <div class="top-content-text">
+            <h1>Welcome to UAP Market</h1>
+            <h2>Best Gaming Store Around!</h2>
+            <p>Welcome {{ user.username }}.</p>
+        </div>
+        <img src="{% static 'assets/photo_banner.png' %}">
+    </div>
+
+    {%if user.is_authenticated %}
+    
+    {% else %}
+        <p>You are not logged in.</p>
+        <a href={% url 'login' %}>Log in here.</a>
+    {% endif %}
+
+    <div class="cart-text">
+        <h2>Trending Games</h2>
+        <p>Check Your Game Items Now!</p>
+    </div>
+
+    {% if products %}
+    <div class="product-list">
+
+        {% for product in products %}
+            <div class="product-card">
+                {% if product.thumbnail %}
+                    <img src="{{product.thumbnail.url}}" alt="Product Image">
+                {% else %}
+                    <img src="{% static 'default.svg' %}" style="width: 128px; height: auto;" alt="Default Image">
+                {% endif %}
+                <div class="product-card-content">
+                    <a href="{% url 'product' store_id=product.store.id product_id=product.id %}"><h4>{{product.name}}</h4></a>
+                    {% if product.description %}
+                        <p>{{ product.description|truncatewords:15 }}</p>
+                    {% endif %}
+                    <p>
+                        <strong>Price:</strong> {{ product.price|floatformat:2 }} $
+                    </p>
+                    {% if product.store %}
+                        <p class="store-name">
+                            <small>Sold by: {{ product.store.name }}</small>
+                        </p>
+                    {% endif %}
+                </div>
+                
+                <form method="post" action="{% url 'add_to_cart' store_id=product.store.id product_id=product.id %}">
+                    {% csrf_token %}
+                    <button class="add-to-cart" type="submit">Add to Cart</button>
+                </form>
+                
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <p>No products exist</p>
+{% endif %}
+    
+{% endblock %}

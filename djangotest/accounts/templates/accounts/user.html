@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}{{ user.username }}{% endblock %}
+
+{% load static %}
+
+{% block styles%}
+    <link rel="stylesheet" type="text/css" href="{% static 'user.css' %}">
+{% endblock%}
+{% block content %}
+
+    <div class="main">
+        <div class="container">
+            <div class="side-to-side">
+                <h1>{{ user.username }}</h1>
+            </div>
+            <h2>Wishlist</h2>
+            <ul>
+                {% for wishlist_item in wishlist %}
+                    <li><a href="{% url 'product' store_id=wishlist_item.product.store.id product_id=wishlist_item.product.id %}">{{ wishlist_item.product.name }}</a></li>
+                {% empty %}
+                    <li>No items in wishlist.</li>
+                {% endfor %}
+            </ul>
+            <h2>Library</h2>
+            <ul>
+                {% for library_item in library %}
+                    <li><a href="{% url 'product' store_id=library_item.product.store.id product_id=library_item.product.id %}">{{ library_item.product.name }}</a></li>
+                {% empty %}
+                    <li>No items in library.</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+
+{% endblock %}

@@ -1,0 +1,168 @@
+.main {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.container {
+  background: #2a1e00;
+  border: 2px solid rgb(255, 187, 0);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 32px 40px;
+  border-radius: 16px;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+}
+
+h2 {
+  font-size: 36px;
+  font-weight: bold;
+  color: white;
+  margin: 0;
+}
+
+p {
+  font-size: 16px;
+  color: white;
+  text-align: justify;
+}
+
+label {
+  color: white;
+  font-size: 16px;
+}
+
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;      /* Center the form items horizontally */
+  gap: 18px;                /* Space between fields */
+  margin: 0 auto;
+}
+
+#io {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+div.verticalflex {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+
+}
+
+.input-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 16px;
+}
+
+.input-container input {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.input-container input:focus {
+  border-bottom-color: #ffbb00;
+}
+
+.input-container label {
+  position: absolute;
+  top: 12px;
+  left: 8px;
+  color: #aaa;
+  font-size: 16px;
+  pointer-events: none;
+  transition: all 0.2s ease;
+}
+
+.input-container input:focus + label,
+.input-container input:not(:placeholder-shown) + label,
+.input-container input:valid + label {
+  top: -10px;
+  font-size: 12px;
+  color: #ffbb00;
+}
+
+button[type="submit"] {
+  padding: 10px 20px;
+  background-color: #ff1818;
+  border: none;
+  color: #000;
+  font-weight: bold;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #e65858;
+}
+
+.errorlist,
+.errorlist li {
+  color: red;
+  font-size: 14px;
+  list-style: disc;
+  margin-left: 20px;
+}
+
+a {
+  text-decoration: none;
+  color: #80b3e9;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+.left-justify {
+  align-items: flex-start;
+}
+
+
+
+
+/* ====================edit profile==================== */
+
+.main-edit {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 40px auto;
+}
+
+/* ====================logout confirm==================== */
+
+.cancel-btn {
+  padding: 10px 20px;
+  background-color: #6afa31;
+  border: none;
+  color: #000;
+  font-weight: bold;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.cancel-btn:hover {
+  background-color: #4bb621;
+  text-decoration: none;
+}

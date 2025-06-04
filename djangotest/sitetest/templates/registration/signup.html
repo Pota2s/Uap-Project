@@ -1,0 +1,23 @@
+{% extends "base.html" %} 
+{% block title%}Sign Up{% endblock %} 
+
+{% load static
+%} {% block styles %}
+<link rel="stylesheet" href="{% static 'account.css' %}" />
+{% endblock %} {% block navbar %} {% endblock %} {% block content %}
+<div class="main">
+  <div class="container">
+    <h2>Sign Up</h2>
+    <form method="post">
+      {% csrf_token %} {{ form.username }} {{ form.password1 }} {{
+      form.password2 }} {{ form.email }} {% if form.non_field_errors %}
+      <div class="error">{{ form.non_field_errors }}</div>
+      {% endif %} {% for field in form %} {% for error in field.errors %}
+      <div class="error">{{ error }}</div>
+      {% endfor %} {% endfor %}
+      <button type="submit">Register</button>
+    </form>
+    <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
+  </div>
+</div>
+{% endblock %}
