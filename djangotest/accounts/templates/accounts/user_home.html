@@ -16,12 +16,16 @@
     <div class="main">
         <div class="container">
             <div class="side-to-side">
-                <h1>{{ user.username }}</h1>
-                <p><a href="{% url 'user_edit' %}">Edit Profile</a></p>
+                
+                <h1><p>Hello, </p>{{ user.username }}</h1>
+                <p><a href="{% url 'user_edit' %}" class="edit_profile">Edit Profile</a></p>
             </div>
-            <div class="side-to-side">
-                <p><a href="{% url 'add_funds' %}">Balance : {{ user.wallet }}$</a></p>
+            <div class="funding">
+                <p id="bal"><a href="{% url 'add_funds' %}">Balance :</a></p>
+                <p><a href="{% url 'add_funds' %}">{{ user.wallet }}$</a></p>
+                <a href="{% url 'add_funds' %}" class="topup-btn">Top Up</a>
             </div>
+            
             <h2>Wishlist</h2>
             <ul>
                 {% for wishlist_item in wishlist %}

@@ -5,6 +5,8 @@ from . import models
 from .forms import StoreForm,ProductForm
 
 # Create your views here.
+
+
 def productView(request : HttpRequest, product_id : int, store_id : int):
     context = dict()
 
