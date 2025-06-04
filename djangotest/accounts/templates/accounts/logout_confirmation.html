@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% block content %}
-    <div class='main'>
+    <div class='main-edit'>
         <div class='container'>
             <h2>Logout Confirmation</h2>
             <p>Are you sure you want to log out?</p>
@@ -17,7 +17,7 @@
                 {% csrf_token %}
                 <button type="submit">Yes, log me out</button>
             </form>
-            <a href="{% url 'home' %}">Cancel</a>
+            <a href="{% url 'home' %}" class="cancel-btn">Cancel</a>
         </div>
     </div>
 {% endblock %}
