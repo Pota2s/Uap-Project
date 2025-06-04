@@ -1,18 +1,45 @@
-from django.contrib.auth.forms import AdminUserCreationForm, UserChangeForm # type: ignore
 from django import forms
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm, AuthenticationForm
+from django.contrib.auth.views import LoginView
 from .models import CustomUser
 
-class CustomUserCreationForm(AdminUserCreationForm):
-    pass
-# Register your models here.
+class CustomAuthenticationForm(AuthenticationForm):
+    username = forms.CharField(
+        widget=forms.TextInput(attrs={
+            'placeholder': 'Username',
+            'class': 'input-field'
+        })
+    )
+    password = forms.CharField(
+        widget=forms.PasswordInput(attrs={
+            'placeholder': 'Password',
+            'class': 'input-field'
+        })
+    )
+
+class CustomLoginView(LoginView):
+    authentication_form = CustomAuthenticationForm
+
+
+class CustomUserCreationForm(UserCreationForm):
     class Meta:
         model = CustomUser
-        fields = ("username","email")
+        fields = ("username", "email")
+        widgets = {
+            'username': forms.TextInput(attrs={'placeholder': 'Enter your username', 'class': 'input-field'}),
+            'email': forms.EmailInput(attrs={'placeholder': 'Enter your email', 'class': 'input-field'}),
+        }
+
 
 class CustomUserChangeForm(UserChangeForm):
     class Meta:
         model = CustomUser
-        fields = ("username","email")
+        fields = ("username", "email")
+        widgets = {
+            'username': forms.TextInput(attrs={'placeholder': ' ', 'class': 'input-field'}),
+            'email': forms.EmailInput(attrs={'placeholder': ' ', 'class': 'input-field'}),
+        }
+
 
 class AddFundsForm(forms.Form):
     amount = forms.FloatField(
