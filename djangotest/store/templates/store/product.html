@@ -14,7 +14,7 @@
         <!-- LEFT: Product Image -->
         <div class="product-image">
             {% if product.thumbnail %}
-                <img src="{{ product.thumbnail.url }}" alt="{{ product.name }}">
+                <img src="{% static 'assets/case.png' %}" alt="{{ product.name }}">
             {% else %}
                 <img src="{% static 'default.svg' %}" alt="Default Product Image">
             {% endif %}

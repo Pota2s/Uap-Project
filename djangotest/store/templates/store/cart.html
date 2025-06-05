@@ -21,7 +21,7 @@
     <div class="container product-list">
         {% for order in cart %}
         <div class="product-card">
-            <img src="{{ order.product.thumbnail }}" alt="{{ order.product.name }}">
+            <img src="{% static 'assets/case.png' %}" alt="{{ order.product.name }}">
             <div class="product-card-content">
                 <a href="{% url 'product' store_id=order.product.store.id product_id=order.product.id %}">
                     <h4>{{ order.product.name }}</h4>
