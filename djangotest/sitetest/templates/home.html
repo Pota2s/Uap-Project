@@ -36,9 +36,9 @@
         {% for product in products %}
             <div class="product-card">
                 {% if product.thumbnail %}
-                    <img src="{{product.thumbnail.url}}" alt="Product Image">
+                    <img src="{% static 'assets/case.png' %}" alt="Product Image">
                 {% else %}
-                    <img src="{% static 'default.svg' %}" style="width: 128px; height: auto;" alt="Default Image">
+                    <img src="{% static 'assets/case.png' %}" style="width: 128px; height: auto;" alt="Default Image">
                 {% endif %}
                 <div class="product-card-content">
                     <a href="{% url 'product' store_id=product.store.id product_id=product.id %}"><h4>{{product.name}}</h4></a>

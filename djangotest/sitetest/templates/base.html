@@ -18,7 +18,7 @@
     <li><a href="{% url 'home'%}" class="active">Home</a></li>
     <li><a href="{% url 'global_store' %}">Categories</a></li>
     {% if user.is_authenticated %}
-        <li><a href="{% url 'cart' %}">CART</a></li>
+        <li><a href="{% url 'cart' %}">Cart</a></li>
         <li>
             <a href="{% url 'user_home' %}" class="profile-link">
                 <img src="{% static 'assets/default.svg' %}" style="height: 50px; width: 50px; background: tran;" alt="Profile">
